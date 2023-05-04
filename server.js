@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const methodOverride = require('method-override')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,11 +15,23 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(function(req, res, next) {
+console.log('Why hello there')
+
+// res.locals is a way to send vars to templates (time in res.locals.time should be called time in todos/index. kale soup here should be called kale soup there. it is just a vars)
+res.locals.time = new Date().toLocaleTimeString()
+// {time : 11:15}
+
+// to move to the next `app.use` in our flow of this file we need to call next and invoke it
+ next()
+})
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

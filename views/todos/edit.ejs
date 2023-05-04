@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+<!--
+<form action="/todos/<%= todo.id %>?_method=PUT" method="POST" autocomplete="off">
+    <input type="text" name="todo" value="<%= todo.todo %>">
+     <label>
+        <input type="checkbox" name="done"  <%= todo.done ? 'checked' : '' %>>
+        Done
+      </label><br>
+    <button>EDIT Todo</button>
+</form>
+-->
+
+<form action="/todos/<%= todo.id %>?_method=PUT" method="POST" autocomplete="off">
+    <div class="mb-3">
+      <label for="todo" class="form-label">To dos</label>
+      <input type="text" class="form-control" id="todo" aria-describedby="todoHelp" name="todo"  value="<%= todo.todo %>"><br>
+      <label>
+        <input type="checkbox" name="done"  <%= todo.done ? 'checked' : '' %>>
+        Done
+      </label><br>
+      <div id="todoHelp" class="form-text">Please enter a todo to be done</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Todo</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

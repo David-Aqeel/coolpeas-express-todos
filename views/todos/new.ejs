@@ -1,0 +1,19 @@
+<%- include('../partials/header.ejs') %>
+
+<!--
+<form action="/todos" method="POST" autocomplete="off">
+    <input type="text" name="todo">
+    <button>Save Todo</button>
+</form>
+-->
+
+<form action="/todos" method="POST" autocomplete="off">
+    <div class="mb-3">
+      <label for="todo" class="form-label">To dos</label>
+      <input type="text" class="form-control" id="todo" aria-describedby="todoHelp" name="todo">
+      <div id="todoHelp" class="form-text">Please enter a todo to be done</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Todo</button>
+</form>
+
+<%- include('../partials/footer.ejs') %>

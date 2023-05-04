@@ -23,7 +23,40 @@ function show(req, res) {
     })
 }
 
+function newTodo(req, res, )  {
+    res.render('todos/new', { title: 'New To-do' })
+}
+
+function create(req, res) {
+    console.log(req.body)
+    Todo.create(req.body)
+    res.redirect('/todos')
+}
+
+function deleteTodo(req, res)  {
+    Todo.deleteOne(req.params.id)
+    res.redirect('/todos')
+}
+function edit (req, res)  {
+    const todo = Todo.getOne(req.params.id);
+    res.render('todos/edit', {
+        title: 'Edit To-Do',
+        todo
+    });
+}
+
+function update (req, res)  {
+    req.body.done = !!req.body.done;
+    Todo.update(req.params.id, req.body);
+    res.redirect(`/todos/${req.params.id}`);
+}
+
 module.exports = {
     index,
-    show
+    show,
+    newTodo,
+    create,
+    deleteTodo,
+    edit,
+    update,
 }

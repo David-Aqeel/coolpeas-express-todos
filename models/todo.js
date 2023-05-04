@@ -7,6 +7,7 @@ const todos = [
 	{ id: 139608, todo: 'Buy Milk', done: false },
 ]
 
+
 // READ - Index get all of a data (todos)
 function getAll()  {
     return todos
@@ -22,8 +23,32 @@ function getOne(id) {
 	return todos.find(todo => todo.id === id)
 }
 
+
+function create(todo) {
+	todo.id = Date.now() % 1000000
+	todo.done = false
+	todos.push(todo)
+}
+
+function deleteOne(id) {
+	id = parseInt(id)
+	const idx = todos.findIndex(todo => todo.id === id)
+	todos.splice(idx, 1)
+}
+
+function update(id, updatedTodo) {
+	id = parseInt(id);
+	const todo = todos.find(todo => todo.id === id);
+	Object.assign(todo, updatedTodo);
+	//todo.todo = updatedTodo.todo; //works for single properties
+}
+
+
 // exporting to use elsewhere in my app
 module.exports = {
     getAll,
-	getOne
+	getOne,
+	create,
+	deleteOne,
+	update
 }
